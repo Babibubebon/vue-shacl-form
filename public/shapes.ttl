@@ -1,0 +1,66 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.com/> .
+
+ex:Example
+    a rdfs:Class, sh:NodeShape ;
+    # 4.1.1 sh:class
+    sh:property [
+        sh:path ex:shClass ;
+        sh:class ex:Foo ;
+    ] ;
+    sh:property [
+        sh:path ex:datatypes ;
+        sh:nodeKind sh:BlankNode ;
+        # 4.1.2 sh:datatype
+        sh:property [
+            sh:path ex:integer ;
+            sh:datatype xsd:integer ;
+        ] ;
+        sh:property [
+            sh:path ex:decimal ;
+            sh:datatype xsd:decimal ;
+        ] ;
+        sh:property [
+            sh:path ex:boolean ;
+            sh:datatype xsd:boolean ;
+        ] ;
+        sh:property [
+            sh:path ex:date ;
+            sh:datatype xsd:date ;
+        ] ;
+        sh:property [
+            sh:path ex:time ;
+            sh:datatype xsd:time ;
+        ] ;
+        sh:property [
+            sh:path ex:dateTime ;
+            sh:datatype xsd:dateTime ;
+        ] ;
+    ] ;
+    # 4.2.1 sh:minCount
+    sh:property [
+        sh:path ex:minCount-1 ;
+        sh:minCount 1 ;
+    ] ;
+    # 4.2.2 sh:maxCount
+    sh:property [
+        sh:path ex:maxCount-1 ;
+        sh:maxCount 1 ;
+    ] ;
+    # 4.3.1 sh:minExclusive
+    # 4.3.2 sh:minInclusive
+    # 4.3.3 sh:maxExclusive
+    # 4.3.4 sh:maxInclusive
+    # 4.4.4 sh:languageIn
+    sh:property [
+        sh:path ex:languageIn ;
+        sh:languageIn ( "ja" "en" ) ;
+    ] ;
+    .
+
+ex:Foo
+    a rdfs:Class, sh:NodeShape ;
+    .
