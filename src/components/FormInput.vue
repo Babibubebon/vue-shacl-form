@@ -51,6 +51,8 @@
   import TypedInput from './TypedInput.vue'
   import FormGroup from './FormGroup.vue'
 
+  import {shrinkUri} from '../lib/util'
+
   const SHACL = new $rdf.Namespace('http://www.w3.org/ns/shacl#')
 
   export default {
@@ -119,6 +121,7 @@
         let quads = objects
           .filter(v => v)
           .map(object => $rdf.quad(this.subject, this.propertyShape.path, object))
+
         if (this.isBlankNode) {
           if (!this.quadsUnderBlankNode || this.quadsUnderBlankNode.flat().length === 0)
             return null
@@ -179,7 +182,7 @@
       },
       shrink(node) {
         if (!node) return ''
-        return node.value
+        return shrinkUri(node, this.shapesGraph.context.$shapes.store.namespaces)
       },
     },
     components: {
