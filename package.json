@@ -2,10 +2,12 @@
   "name": "vue-shacl-form",
   "version": "0.1.0",
   "main": "dist/VueShaclForm.common.js",
+  "author": "Babibubebon",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name VueShaclForm src/ShaclForm.vue",
-    "build-demo": "vue-cli-service build src/main.js",
+    "build-demo": "vue-cli-service build src/main.js --dest demo",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -24,7 +26,6 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-beta.5",
     "jquery": "^3.3.1",
-    "n3": "^1.0.1",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
   },

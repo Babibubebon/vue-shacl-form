@@ -2,6 +2,7 @@
 .eslintignore
 node_modules
 /dist
+/demo
 *.iml
 /.idea
 
