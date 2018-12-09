@@ -118,6 +118,9 @@
         if (objects.length === 0)
           return null
 
+        if (!this.subject)
+          return null
+
         let quads = objects
           .filter(v => v)
           .map(object => $rdf.quad(this.subject, this.propertyShape.path, object))
@@ -167,8 +170,8 @@
             if (this.constraintParams['nodeKind'] && this.constraintParams['nodeKind'].equals(SHACL('IRI')))
               objects.push(value ? $rdf.namedNode(value) : null)
             else {
-              let language = this.constraintParams['languageIn'] && this.constraintParams['languageIn'].length === 1
-                ? this.languageIn[0]   // default language tag
+              let language = this.constraintParams['languageIn'] && this.constraintParams['languageIn'].elements.length === 1
+                ? this.constraintParams['languageIn'].elements[0].value   // default language tag
                 : this.language[index]
               this.$set(this.language, index, language)
               objects.push(value ? $rdf.literal(value, this.language[index] || this.constraintParams['datatype']) : null)

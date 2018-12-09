@@ -57,7 +57,11 @@ ex:Example
     # 4.4.4 sh:languageIn
     sh:property [
         sh:path ex:languageIn ;
-        sh:languageIn ( "ja" "en" ) ;
+        sh:languageIn ( "en" ) ;
+    ] ;
+    sh:property [
+        sh:path ex:languageIn ;
+        sh:languageIn ( "ja-Jpan" "ja-Hani" "ja-Hrkt" "ja-Hira" "ja-Kana" "ja-Latn" ) ;
     ] ;
     .
 

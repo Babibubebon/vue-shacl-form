@@ -82,6 +82,7 @@
     },
     methods: {
       onUpdate() {
+        if (!this.subject) return
         const graph = $rdf.graph()
         graph.namespaces = Object.assign({}, this.validator.$shapes.store.namespaces)
         graph.addAll(this.quads)
