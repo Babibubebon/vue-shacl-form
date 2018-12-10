@@ -46,7 +46,9 @@
     watch: {
       shapesGraphText: {
         handler(newValue) {
-          this.validator.updateShapesGraph(newValue, () => true)
+          this.validator.updateShapesGraph(newValue, () => {
+            this.onLoad()
+          })
         }
       },
       shapesGraph: {
