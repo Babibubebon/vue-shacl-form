@@ -1,6 +1,6 @@
 <template>
     <div :class="options.styles.field">
-        <label :class="options.styles.label">
+        <div :class="options.styles.label">
             <abbr :title="propertyShape.path.value">
                 {{ shrink(propertyShape.path) }}
             </abbr>
@@ -10,7 +10,7 @@
                     v-if="!constraintParams.maxCount || constraintParams.maxCount > 1"
                     @click.prevent="add">+
             </button>
-        </label>
+        </div>
         <div v-if="!isBlankNode" :class="options.styles.inputColumn">
             <div :class="options.styles.inputGroup" v-for="(value, index) in inputValue">
                 <typed-input :datatype="constraintParams.datatype"
