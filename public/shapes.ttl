@@ -42,25 +42,52 @@ ex:Example
     ] ;
     # 4.2.1 sh:minCount
     sh:property [
-        sh:path ex:minCount-1 ;
+        sh:path ex:minCount ;
         sh:minCount 1 ;
     ] ;
     # 4.2.2 sh:maxCount
     sh:property [
-        sh:path ex:maxCount-1 ;
+        sh:path ex:maxCount ;
         sh:maxCount 1 ;
     ] ;
-    # 4.3.1 sh:minExclusive
-    # 4.3.2 sh:minInclusive
-    # 4.3.3 sh:maxExclusive
-    # 4.3.4 sh:maxInclusive
+    sh:property [
+        sh:path ex:valueRange ;
+        sh:nodeKind sh:BlankNode ;
+        # 4.3.1 sh:minExclusive
+        sh:property [
+            sh:path ex:minExclusive ;
+            sh:datatype xsd:integer ;
+            sh:minExclusive 1 ;
+        ] ;
+        # 4.3.2 sh:minInclusive
+        sh:property [
+            sh:path ex:minInclusive ;
+            sh:datatype xsd:integer ;
+            sh:minInclusive 1 ;
+        ] ;
+        # 4.3.3 sh:maxExclusive
+        sh:property [
+            sh:path ex:maxExclusive ;
+            sh:datatype xsd:integer ;
+            sh:maxExclusive 1 ;
+        ] ;
+        # 4.3.4 sh:maxInclusive
+        sh:property [
+            sh:path ex:maxInclusive ;
+            sh:datatype xsd:integer ;
+            sh:maxInclusive 1 ;
+        ] ;
+    ] ;
+    # 4.4.1 sh:minLength
+    # 4.4.2 sh:maxLength
+    # 4.4.3 sh:pattern
     # 4.4.4 sh:languageIn
     sh:property [
         sh:path ex:languageIn ;
         sh:languageIn ( "en" ) ;
     ] ;
     sh:property [
-        sh:path ex:languageIn ;
+        sh:path ex:languageInMulti ;
         sh:languageIn ( "ja-Jpan" "ja-Hani" "ja-Hrkt" "ja-Hira" "ja-Kana" "ja-Latn" ) ;
     ] ;
     .

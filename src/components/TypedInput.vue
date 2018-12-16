@@ -16,7 +16,7 @@
         </div>
     </div>
     <input v-else
-           :class="options.styles.input"
+           :class="[options.styles.input, isValid ? options.styles.validInput : options.styles.invalidInput]"
            :type="inputType"
            :value="value" @input="onInput"/>
 </template>
@@ -29,7 +29,7 @@
   export default {
     name: 'TypedInput',
     props: [
-      'datatype', 'value'
+      'datatype', 'value', 'isValid'
     ],
     data() {
       return {

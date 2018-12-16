@@ -1,3 +1,10 @@
+const externals = process.env.BUNDLE_DEPS
+  ? {}
+  : {
+    'rdflib': 'rdflib',
+    'shacl': 'shacl'
+  }
+
 module.exports = {
   css: {
     extract: false
@@ -6,7 +13,8 @@ module.exports = {
     externals: {
       'solid-auth-client': 'null',
       'xmldom': 'window',
-      'xmlhttprequest': 'XMLHttpRequest'
+      'xmlhttprequest': 'XMLHttpRequest',
+      ...externals
     }
   }
 }

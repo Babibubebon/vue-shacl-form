@@ -38,13 +38,19 @@
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+
                 <div class="tab-pane show active" id="form" role="tabpanel" aria-labelledby="form-tab">
                     <shacl-form :shapesGraph="shapesGraph"
                                 :targetClass="targetClass"
                                 :options="options"
+                                ref="shaclForm"
                                 @update="onUpdate"
                                 @load="onLoad"></shacl-form>
+                    <button @click.prevent="validate" class="btn btn-warning">
+                        Validate
+                    </button>
                 </div>
+
                 <div class="tab-pane" id="shapes" role="tabpanel" aria-labelledby="shapes-tab">
                     <div class="card text-left">
                         <div class="card-body">
@@ -52,6 +58,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane" id="data" role="tabpanel" aria-labelledby="data-tab">
                     <div class="card text-left">
                         <div class="card-body">
@@ -59,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -94,6 +102,9 @@
         }).catch(e => {
           alert('failed to load ' + this.shapeFileUri + '\n' + e)
         })
+      },
+      validate() {
+        this.$refs.shaclForm.validate()
       },
       onUpdate(graph) {
         this.dataText = graph.serialize(null, 'text/turtle')

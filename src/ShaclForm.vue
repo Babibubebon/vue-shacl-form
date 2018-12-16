@@ -10,13 +10,14 @@
         </div>
         <form-group :subject="subject" :shape="shape" v-if="shape"
                     v-model="quads" @input="onUpdate"></form-group>
+
     </form>
 </template>
 
 <script>
+  import merge from 'merge'
   import $rdf from 'rdflib'
   import SHACLValidator from 'shacl'
-  import merge from 'merge'
 
   import FormGroup from './components/FormGroup.vue'
   import defaultOptions from './lib/options'
@@ -34,12 +35,14 @@
         subjectUri: '',
         quads: [],
         mergedOptions: defaultOptions,
-        validator: new SHACLValidator()
+        validator: new SHACLValidator(),
+        validationResults: []
       }
     },
     provide() {
       return {
         shapesGraph: this.validator.shapesGraph,
+        validationResults: this.validationResults,
         options: this.mergedOptions
       }
     },
@@ -84,10 +87,11 @@
     },
     methods: {
       onUpdate() {
-        if (!this.subject) return
         const graph = $rdf.graph()
-        graph.namespaces = Object.assign({}, this.validator.$shapes.store.namespaces)
-        graph.addAll(this.quads)
+        if (this.subject) {
+          graph.namespaces = Object.assign({}, this.validator.$shapes.store.namespaces)
+          graph.addAll(this.quads)
+        }
         this.$emit('update', graph)
       },
       onLoad() {
@@ -98,6 +102,21 @@
           return shape.shapeNode.value
         })
         this.$emit('load', shapes)
+      },
+      validate() {
+        return new Promise((resolve , reject) => {
+          const graph = $rdf.graph()
+          graph.addAll(this.quads)
+          this.validator.updateDataGraphRdfModel(graph, (err, report) => {
+            if (err) {
+              reject(err)
+            } else {
+              this.validationResults.splice(0, this.validationResults.length)
+              this.validationResults.push(...report.results())
+              resolve(report.results())
+            }
+          })
+        })
       }
     },
     components: {

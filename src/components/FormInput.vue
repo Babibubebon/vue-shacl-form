@@ -7,13 +7,14 @@
             <br>
             <button type="button"
                     :class="[options.styles.button, options.styles.buttonAdd]"
-                    v-if="!constraintParams.maxCount || constraintParams.maxCount > 1"
+                    v-if="isAddable"
                     @click.prevent="add">+
             </button>
         </div>
         <div v-if="!isBlankNode" :class="options.styles.inputColumn">
-            <div :class="options.styles.inputGroup" v-for="(value, index) in inputValue">
+            <div v-for="(value, index) in inputValue" :class="options.styles.inputGroup">
                 <typed-input :datatype="constraintParams.datatype"
+                             :isValid="isValid(index)"
                              v-model="inputValue[index]"
                              @input="onInput"/>
                 <div v-if="constraintParams.languageIn" :class="options.styles.inputGroupAppend">
@@ -26,22 +27,28 @@
                     </select>
                 </div>
                 <button :class="[options.styles.button, options.styles.buttonDel]"
-                        v-if="!constraintParams.minCount || constraintParams.minCount > 1"
-                        @click.prevent="remove">×
+                        v-if="isRemovable"
+                        @click.prevent="remove(index)">×
                 </button>
+                <div :class="options.styles.invalidFeedback" v-if="!isValid(index)">
+                    <ul>
+                        <li v-for="result in validation[index]">{{ result.message() }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div v-else :class="options.styles.inputColumn">
-            <form-group :class="options.styles.fieldChild"
-                        v-for="(node, index) in objects()" :key="node.value"
-                        v-model="quadsUnderBlankNode[index]"
-                        :subject="node"
-                        :shape="blankNodeTarget"
-                        @input="onInput"></form-group>
-            <button :class="[options.styles.button, options.styles.buttonDel]"
-                    v-if="!constraintParams.minCount || constraintParams.minCount > 1"
-                    @click.prevent="remove">×
-            </button>
+            <div v-for="(node, index) in objects()" :key="node.value">
+                <form-group :class="options.styles.fieldChild"
+                            v-model="quadsUnderBlankNode[index]"
+                            :subject="node"
+                            :shape="blankNodeTarget"
+                            @input="onInput"></form-group>
+                <button :class="[options.styles.button, options.styles.buttonDel]"
+                        v-if="isRemovable"
+                        @click.prevent="remove(index)">×
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -58,8 +65,8 @@
   export default {
     name: 'FormInput',
     props: [
-      'propertyShapeNode', // sh:PropertyShape node
-      'subject',           // The namedNode of subject of instance
+      'propertyShapeNode', // Shape instance which is sh:PropertyShape
+      'subject',           // subject of the instance being edited
       'value'
     ],
     data() {
@@ -72,7 +79,7 @@
       }
     },
     inject: [
-      'shapesGraph', 'options'
+      'shapesGraph', 'options', 'validationResults'
     ],
     watch: {
       subject() {
@@ -112,6 +119,28 @@
           return this.shapesGraph.getShape(this.constraintParams['class'])
         // from sh:property
         return this.propertyShape
+      },
+      isAddable() {
+        return !this.constraintParams.maxCount
+          || this.constraintParams.maxCount > this.inputValue.length
+      },
+      isRemovable() {
+        return !this.constraintParams.minCount
+          || this.constraintParams.minCount < this.inputValue.length
+      },
+      validation() {
+        if (this.validationResults.length === 0)
+          return []
+
+        const focusNode = this.subject.termType === 'BlankNode' ? this.subject.toString() : this.subject.value
+        return this.inputValue.map(value => {
+          return this.validationResults.filter(result => {
+            return result.focusNode() === focusNode
+              && result.path() === this.propertyShape.path.value
+              && (!result.resultNode['http://www.w3.org/ns/shacl#value']
+                || result.resultNode['http://www.w3.org/ns/shacl#value'][0]['@value'] === value)
+          })
+        })
       },
       quads() {
         const objects = this.objects()
@@ -155,6 +184,9 @@
             this.add()
         }
         this.onInput()
+      },
+      isValid(index) {
+        return !this.validation[index] || this.validation[index].length === 0
       },
       objects() {
         const objects = []
