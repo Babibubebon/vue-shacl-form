@@ -18,6 +18,7 @@
     <input v-else
            :class="[options.styles.input, isValid ? options.styles.validInput : options.styles.invalidInput]"
            :type="inputType"
+           :minlength="minlength" :maxlength="maxlength"
            :value="value" @input="onInput"/>
 </template>
 
@@ -29,7 +30,7 @@
   export default {
     name: 'TypedInput',
     props: [
-      'datatype', 'value', 'isValid'
+      'constraints', 'value', 'isValid'
     ],
     data() {
       return {
@@ -44,7 +45,7 @@
     },
     computed: {
       inputType() {
-        switch (!this.datatype || this.datatype.value) {
+        switch (!this.constraints.datatype || this.constraints.datatype.value) {
           case XSD('date').value:
             return 'date'
           case XSD('time').value:
@@ -60,7 +61,13 @@
           default:
             return 'text'
         }
-      }
+      },
+      minlength() {
+        return this.constraints.minLength ? this.constraints.minLength : null
+      },
+      maxlength() {
+        return this.constraints.maxLength ? this.constraints.maxLength : null
+      },
     },
     methods: {
       onInput(event) {

@@ -13,7 +13,7 @@
         </div>
         <div v-if="!isBlankNode" :class="options.styles.inputColumn">
             <div v-for="(value, index) in inputValue" :class="options.styles.inputGroup">
-                <typed-input :datatype="constraintParams.datatype"
+                <typed-input :constraints="constraintParams"
                              :isValid="isValid(index)"
                              v-model="inputValue[index]"
                              @input="onInput"/>
@@ -93,6 +93,7 @@
             for (let param in constraint.parameterValues) {
               let value = constraint.parameterValues[param]
               if (param === 'property') {
+                // sh:property
                 if (!this.constraintParams[param]) this.$set(this.constraintParams, param, [])
                 this.constraintParams[param].push(value)
               } else {

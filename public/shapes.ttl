@@ -8,8 +8,9 @@ ex:Example
     a rdfs:Class, sh:NodeShape ;
     # 4.1.1 sh:class
     sh:property [
-        sh:path ex:shClass ;
+        sh:path ex:class ;
         sh:class ex:Foo ;
+        sh:nodeKind sh:IRI ;
     ] ;
     sh:property [
         sh:path ex:datatypes ;
@@ -79,8 +80,26 @@ ex:Example
         ] ;
     ] ;
     # 4.4.1 sh:minLength
+    sh:property [
+        sh:path ex:minLength ;
+        sh:minLength 5 ;
+    ] ;
     # 4.4.2 sh:maxLength
+    sh:property [
+        sh:path ex:maxLength ;
+        sh:maxLength 10 ;
+    ] ;
+    sh:property [
+        sh:path ex:minAndMaxLength ;
+        sh:minLength 5 ;
+        sh:maxLength 10 ;
+    ] ;
     # 4.4.3 sh:pattern
+    sh:property [
+        sh:path ex:pattern ;
+        sh:pattern "^CODE[0-9]+" ;
+        sh:flags "i" ;
+    ] ;
     # 4.4.4 sh:languageIn
     sh:property [
         sh:path ex:languageIn ;
