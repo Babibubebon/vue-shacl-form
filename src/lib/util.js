@@ -2,7 +2,7 @@ import $rdf from 'rdflib'
 
 function shrinkUri(node, namespaces) {
   let uri
-  if (node instanceof $rdf.NamedNode)
+  if (node.termType && node.termType === 'NamedNode')
     uri = node.value
   else if (typeof node === 'string')
     uri = node
