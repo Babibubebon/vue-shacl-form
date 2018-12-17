@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "merge": "^1.2.1",
-    "rdflib": "github.com:Babibubebon/rdflib.js#fix",
+    "rdflib": "github:Babibubebon/rdflib.js#fix",
     "shacl": "github:Babibubebon/shacl-js#develop"
   },
   "devDependencies": {
