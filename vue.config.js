@@ -1,8 +1,16 @@
 const externals = process.env.BUNDLE_DEPS
   ? {}
   : {
-    'rdflib': 'rdflib',
-    'shacl': 'shacl'
+    'rdflib': {
+      commonjs: 'rdflib',
+      commonjs2: 'rdflib',
+      root: '$rdf',
+    },
+    'shacl': {
+      commonjs: 'shacl',
+      commonjs2: 'shacl',
+      root: 'SHACLValidator'
+    }
   }
 
 module.exports = {
