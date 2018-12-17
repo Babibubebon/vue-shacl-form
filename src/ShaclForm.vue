@@ -48,8 +48,9 @@
     },
     watch: {
       shapesGraphText: {
+        immediate: true,
         handler(newValue) {
-          this.validator.updateShapesGraph(newValue, () => {
+          this.validator.updateShapesGraph(newValue, this.mergedOptions.format, () => {
             this.onLoad()
           })
         }

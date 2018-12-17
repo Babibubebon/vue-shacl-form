@@ -1,4 +1,5 @@
 export default {
+  format: 'text/turtle',
   styles: {
     // for Bootstrap 4
     field: 'form-group row',
