@@ -1,6 +1,6 @@
 {
   "name": "vue-shacl-form",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A Vue.js component for HTML5 form generation based on SHACL",
   "main": "dist/VueShaclForm.common.js",
   "author": "Babibubebon",
