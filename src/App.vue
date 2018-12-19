@@ -40,7 +40,7 @@
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane show active" id="form" role="tabpanel" aria-labelledby="form-tab">
-                    <shacl-form :shapesGraph="shapesGraph"
+                    <shacl-form :shapesGraphText="shapesText"
                                 :targetClass="targetClass"
                                 :options="options"
                                 ref="shaclForm"
@@ -98,7 +98,6 @@
         this.shapesGraph = $rdf.graph();
         axios.get(this.shapeFileUri).then(response => {
           this.shapesText = response.data
-          $rdf.parse(response.data, this.shapesGraph, 'urn:x-shacl:shapesGraph', 'text/turtle')
         }).catch(e => {
           alert('failed to load ' + this.shapeFileUri + '\n' + e)
         })
