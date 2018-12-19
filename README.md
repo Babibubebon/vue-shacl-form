@@ -7,6 +7,8 @@ npm i -S vue-shacl-form
 ```
 
 ## Usage
+[**Demo**](https://jsfiddle.net/Babibubebon/eywraw8t/512093/)
+
 basic example
 ```html
 <template>
