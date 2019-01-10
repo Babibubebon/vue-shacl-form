@@ -5,6 +5,10 @@
   "main": "dist/VueShaclForm.umd.js",
   "author": "Babibubebon",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Babibubebon/vue-shacl-form.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve --mode bundle",
     "build": "vue-cli-service build --target lib --formats umd,umd-min --name VueShaclForm src/ShaclForm.vue",
@@ -18,14 +22,14 @@
   },
   "devDependencies": {
     "@babel/runtime-corejs2": "^7.1.5",
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
-    "bootstrap": "^4.1.3",
-    "eslint": "^5.10.0",
-    "eslint-plugin-vue": "^5.0.0-beta.5",
+    "bootstrap": "^4.2.1",
+    "eslint": "^5.12.0",
+    "eslint-plugin-vue": "^5.1.0",
     "jquery": "^3.3.1",
     "vue": "^2.5.20",
     "vue-template-compiler": "^2.5.20"
