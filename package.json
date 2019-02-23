@@ -21,7 +21,7 @@
     "shacl": "github:Babibubebon/shacl-js#develop"
   },
   "devDependencies": {
-    "@babel/runtime-corejs2": "^7.1.5",
+    "@babel/runtime-corejs2": "^7.3.1",
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
@@ -31,8 +31,8 @@
     "eslint": "^5.12.0",
     "eslint-plugin-vue": "^5.1.0",
     "jquery": "^3.3.1",
-    "vue": "^2.5.20",
-    "vue-template-compiler": "^2.5.20"
+    "vue": "^2.6.7",
+    "vue-template-compiler": "^2.6.7"
   },
   "eslintConfig": {
     "root": true,
