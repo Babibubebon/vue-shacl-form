@@ -20,6 +20,7 @@ module.exports = {
   configureWebpack: {
     externals: {
       'solid-auth-client': 'null',
+      'solid-auth-cli': 'null',
       'xmldom': 'window',
       'xmlhttprequest': 'XMLHttpRequest',
       ...externals

@@ -1,6 +1,7 @@
 <template>
     <div>
         <form-input v-for="(cons, idx) in propertyConstraints"
+                    :key="idx"
                     :subject="subject"
                     :propertyShapeNode="cons.paramValue"
                     v-model="quads[idx]"
@@ -9,7 +10,8 @@
 </template>
 
 <script>
-  import $rdf from 'rdflib'
+  import * as $rdf from 'rdflib'
+  import FormInput from './FormInput.vue'
 
   const SHACL = new $rdf.Namespace('http://www.w3.org/ns/shacl#')
   const RDF = new $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
@@ -51,6 +53,9 @@
         }
         this.$emit('input', quads)
       }
+    },
+    components: {
+      FormInput
     }
   }
 </script>

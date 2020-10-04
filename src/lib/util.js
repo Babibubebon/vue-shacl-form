@@ -1,4 +1,4 @@
-import $rdf from 'rdflib'
+import * as $rdf from 'rdflib'
 
 function shrinkUri(node, namespaces) {
   let uri
