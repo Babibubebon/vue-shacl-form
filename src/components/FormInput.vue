@@ -54,9 +54,8 @@
 </template>
 
 <script>
-  import $rdf from 'rdflib'
+  import * as $rdf from 'rdflib'
   import TypedInput from './TypedInput.vue'
-  import FormGroup from './FormGroup.vue'
 
   import {shrinkUri} from '../lib/util'
 
@@ -139,7 +138,8 @@
             return result.focusNode() === focusNode
               && result.path() === this.propertyShape.path.value
               && (!result.resultNode['http://www.w3.org/ns/shacl#value']
-                || result.resultNode['http://www.w3.org/ns/shacl#value'][0]['@value'] === value)
+                || result.resultNode['http://www.w3.org/ns/shacl#value'][0]['@value'] === value
+                || result.resultNode['http://www.w3.org/ns/shacl#value'][0]['@id'] === value)
           })
         })
       },
@@ -222,8 +222,8 @@
       },
     },
     components: {
-      'TypedInput': TypedInput,
-      'FormGroup': FormGroup
+      TypedInput,
+      FormGroup: () => import('./FormGroup.vue')
     }
   }
 </script>

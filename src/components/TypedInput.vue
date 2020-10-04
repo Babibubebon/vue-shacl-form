@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import $rdf from 'rdflib'
+  import * as $rdf from 'rdflib'
 
   const XSD = new $rdf.Namespace('http://www.w3.org/2001/XMLSchema#')
 
