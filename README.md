@@ -7,7 +7,7 @@ npm i -S vue-shacl-form
 ```
 
 ## Usage
-[**Demo**](https://jsfiddle.net/Babibubebon/e83a0yhL/3/)
+[**Demo**](https://jsfiddle.net/Babibubebon/e83a0yhL/4/)
 
 basic example
 ```html
@@ -30,10 +30,12 @@ const shapes = `
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex: <http://example.com/> .
 
-ex:Book
-    a rdfs:Class, sh:NodeShape ;
+ex:BookShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Book ;
     sh:property [
         sh:path ex:title ;
+        sh:minCount 1 ;
     ] ;
     sh:property [
         sh:path ex:author ;
@@ -41,6 +43,11 @@ ex:Book
     sh:property [
         sh:path ex:datePublished ;
         sh:datatype xsd:date ;
+    ] ;
+    sh:property [
+        sh:path ex:isbn ;
+        sh:pattern "^(97(8|9))?\\\\d{9}(\\\\d|X)$" ;
+        sh:maxCount 1 ;
     ] ;
     .
 `;
@@ -55,7 +62,9 @@ export default {
   },
   methods: {
     onUpdate(dataGraph) {
-      this.data = dataGraph.toNT();
+      if (dataGraph) {
+        this.data = dataGraph.toNT();
+      }
     }
   },
   components: {
