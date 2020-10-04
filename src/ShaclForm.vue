@@ -2,7 +2,7 @@
   <form>
     <div :class="mergedOptions.styles.field">
       <label :class="mergedOptions.styles.label">
-        Subject
+        Subject URI
       </label>
       <div :class="mergedOptions.styles.inputColumn">
         <input :class="mergedOptions.styles.input" v-model="subjectUri"/>
