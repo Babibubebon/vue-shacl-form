@@ -111,12 +111,10 @@ export default {
         this.validator.updateDataGraphRdfModel(graph, (err, report) => {
           if (err) {
             reject(err)
-            console.log(err)
           } else {
             this.validationResults.splice(0, this.validationResults.length)
             this.validationResults.push(...report.results())
             resolve(report.results())
-            console.log(report.results())
           }
         })
       })
